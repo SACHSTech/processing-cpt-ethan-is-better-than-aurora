@@ -1,36 +1,54 @@
 import processing.core.PApplet;
-
+/**
+* A code that creates a game where there is snow falling and the player has to avoid hitting the snow
+* @author: Ethan Rodrigues
+*/
 public class Sketch1 extends PApplet {
-	
-	
-  /**
-   * Called once at the beginning of execution, put your size all in this method
-   */
-  public void settings() {
-	// put your size call here
-    size(400, 400);
-  }
-
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
-  public void setup() {
-    background(210, 255, 173);
-  }
-
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
-  public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
-  }
+  // create arrays for the falling snow
+  float[] circleY = new float[10];
+  float[] circleX = new float[10];
   
-  // define other methods down here.
+  // set speed for falling snow
+  float circleSpeed = 4;
+
+  public void settings() {
+    // screen size
+    size(1600, 800);
+  }
+
+  public void setup() {
+    // background colour
+    background(212, 244, 255);
+
+    // set locations for the snow within the height and width of the screen
+    for (int i = 0; i < circleX.length; i++){
+      circleY[i] = random(height);
+      circleX[i] = random(width);
+    }
+  }
+
+  public void draw() {
+    // background colour
+    background(212, 244, 255);
+       
+    // draws circle for snow if ballhidestatus is off
+    for (int i = 0; i < circleY.length; i++){
+        fill(255);
+        ellipse(circleX[i], circleY[i], 30, 30);
+        circleY[i] = circleY[i] + circleSpeed;
+      
+      // makes snow be redrawn at the top of the screen when it reaches the bottom
+      if (circleY[i] >= height){
+        circleY[i] = 0;
+      }
+      
+      // if the player clicks on the snow, the it will be hidden
+      if (mousePressed){
+        if ((mouseX <= circleX[i] + 20) && (mouseX >= circleX[i] - 20)){
+          if((mouseY <= circleY[i] + 20) && (mouseY >= circleY[i] - 20)){
+          }
+        }
+      }
+    }
+  }
 }
