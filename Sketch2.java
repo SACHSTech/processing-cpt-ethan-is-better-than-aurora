@@ -8,7 +8,7 @@ public class Sketch2 extends PApplet {
    */
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(1600, 800);
   }
 
   /** 
@@ -25,11 +25,8 @@ public class Sketch2 extends PApplet {
   public void draw() {
 	  
 	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
+    rect(100, 100, 250, 25);
+    rect(a, b, c, d);
   }
   
   // define other methods down here.
