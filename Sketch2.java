@@ -1,5 +1,7 @@
 import processing.core.PApplet;
-
+/**
+* @author: Aurora Chen
+*/
 public class Sketch2 extends PApplet {
 	
 	

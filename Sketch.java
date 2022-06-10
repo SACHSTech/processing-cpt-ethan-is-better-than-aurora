@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 import processing.core.PImage;
-
+/**
+* @author: Ethan Rodrigues and Aurora Chen
+*/
 public class Sketch extends PApplet {
 
   // import images
