@@ -30,7 +30,6 @@ public class Sketch extends PApplet {
 
   // monster locations
   
-
   // life variable
   int playerlives = 3;
 
@@ -119,14 +118,13 @@ public class Sketch extends PApplet {
         }
       }
     }
-      
 
     // draw keys
     imgKey.resize(100,100); 
     image(imgKey,120,720);
-    image(imgKey,120,720);  
-
-
+    image(imgKey,420,720); 
+    image(imgKey,600,120); 
+    image(imgKey,1200,120);
 
     // draws circle for rocks
     stroke(0);
