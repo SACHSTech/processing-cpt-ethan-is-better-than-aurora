@@ -1,10 +1,15 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Sketch extends PApplet {
+
+  // import images
+  PImage imgKey;
+
   // create arrays for the falling rocks
   float[] circleY = new float[5];
   float[] circleX = new float[5];
-  int circleSpeed = 2;
+  int circleSpeed = 3;
 
   // player location variables
   float playerX = 50;
@@ -41,6 +46,9 @@ public class Sketch extends PApplet {
   public void setup() {
    // background colour
    background(0, 161, 8);
+
+   // set images 
+   imgKey = loadImage("keyImage.png");
 
    // set locations for the rocks within the height and width of the screen
    for (int i = 0; i < circleX.length; i++){
@@ -93,25 +101,33 @@ public class Sketch extends PApplet {
     rect(1220, 720,300,10);
     rect(1520, 520,10,210);
 
-    // player movement controls 
+    // player movement controls - ADD METHOD TO DETERMINE IF IT CAN MOVE OR NOT
     ellipse(playerX, playerY, 80,80);
-    if (keyPressed) {
-      if (key == 'w') {
-        playerY -= 2;
-      } 
-      else if (key == 'a') {
-        playerX -= 2;
-      } 
-      else if(key == 's'){
-        playerY += 2;
+    if (canMove(playerX, playerY) == true){
+      if (keyPressed) {
+        if (key == 'w') {
+          playerY -= 2;
+        } 
+        else if (key == 'a') {
+          playerX -= 2;
+        } 
+        else if(key == 's'){
+          playerY += 2;
+        }
+        else if(key == 'd'){
+          playerX += 2;
+        }
       }
-      else if(key == 'd'){
-        playerX += 2;
-      }
-    } 
+    }
+      
 
     // draw keys
-       
+    imgKey.resize(100,100); 
+    image(imgKey,120,720);
+    image(imgKey,120,720);  
+
+
+
     // draws circle for rocks
     stroke(0);
     for (int i = 0; i < circleY.length; i++){
@@ -126,6 +142,13 @@ public class Sketch extends PApplet {
       }
     }
   }
-  
-  // define other methods down here.
+
+  public boolean canMove(float playerX, float playerY){
+    if (playerX == 220 && playerY == 200){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
 }
