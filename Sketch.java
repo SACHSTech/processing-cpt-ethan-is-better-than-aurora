@@ -5,6 +5,7 @@ public class Sketch extends PApplet {
 
   // import images
   PImage imgKey;
+  PImage imgFlashlightCircle;
 
   // create arrays for the falling rocks
   float[] circleY = new float[5];
@@ -48,6 +49,7 @@ public class Sketch extends PApplet {
 
    // set images 
    imgKey = loadImage("keyImage.png");
+   imgFlashlightCircle = loadImage("FlashlightCircle.png");
 
    // set locations for the rocks within the height and width of the screen
    for (int i = 0; i < circleX.length; i++){
