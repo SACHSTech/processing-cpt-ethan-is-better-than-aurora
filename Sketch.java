@@ -15,6 +15,7 @@ public class Sketch extends PApplet {
   // player location variables
   float playerX = 50;
   float playerY = 350;
+  float playerSpeed = 4;
 
   // key locations
   int firstKeyX = 270;
@@ -107,16 +108,16 @@ public class Sketch extends PApplet {
     if (canMove(playerX, playerY) == true){
       if (keyPressed) {
         if (key == 'w') {
-          playerY -= 2;
+          playerY -= playerSpeed;
         } 
         else if (key == 'a') {
-          playerX -= 2;
+          playerX -= playerSpeed;
         } 
         else if(key == 's'){
-          playerY += 2;
+          playerY += playerSpeed;
         }
         else if(key == 'd'){
-          playerX += 2;
+          playerX += playerSpeed;
         }
       }
     }
