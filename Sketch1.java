@@ -8,6 +8,8 @@ public class Sketch1 extends PApplet {
   // import images
   PImage imgKey;
   PImage imgFlashlightCircle;
+  PImage imgRobot;
+  PImage imgRobotStill;
 
   // create arrays for the falling rocks
   float[] circleY = new float[5];
@@ -53,6 +55,10 @@ public class Sketch1 extends PApplet {
    // set images 
    imgKey = loadImage("keyImage.png");
    imgFlashlightCircle = loadImage("FlashlightCircle.png");
+
+   //robot images
+   imgRobot = loadImage("RobotSpriteSheet.png");
+   imgRobotStill = imgRobot.get(0,0,192,256);
 
    // set locations for the rocks within the height and width of the screen
    for (int i = 0; i < circleX.length; i++){
@@ -107,7 +113,25 @@ public class Sketch1 extends PApplet {
 
     // player movement controls - ADD METHOD TO DETERMINE IF IT CAN MOVE OR NOT
     ellipse(playerX, playerY, 80,80);
-    if (canMove(playerX, playerY) == true){
+    if(keyPressed){
+      if(key == 'w' && canMoveUP(playerX, playerY) == true){
+        playerY -= playerSpeed;
+      }
+      else if(key == 'a' && canMoveLEFT(playerX, playerY) == true){
+        playerX -= playerSpeed;
+      }
+      else if(key == 's' && canMoveDOWN(playerX, playerY) == true){
+        playerY += playerSpeed;
+      }
+      else if(key == 'd' && canMoveRIGHT(playerX, playerY) == true){
+        playerX += playerSpeed;
+      }
+    }
+
+    
+
+    
+    /*if (canMove(playerX, playerY) == true){
       if (keyPressed) {
         if (key == 'w') {
           playerY -= playerSpeed;
@@ -122,7 +146,7 @@ public class Sketch1 extends PApplet {
           playerX += playerSpeed;
         }
       }
-    }
+    }*/
 
     // draw keys
     imgKey.resize(100,100); 
@@ -146,8 +170,38 @@ public class Sketch1 extends PApplet {
     }
   }
 
-  public boolean canMove(float playerX, float playerY){
-    if (playerX == 220 && playerY == 200){
+  public boolean canMoveUP(float playerX, float playerY){
+    if (playerY <= 70){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  public boolean canMoveDOWN(float playerX, float playerY){
+    if (playerY >= 770){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  public boolean canMoveRIGHT(float playerX, float playerY){
+    if (playerX >= 1570){
+      return false;
+    }
+    else if ((playerX <= 120 && playerY >= 120) || (playerX <= 120 && playerY <= 720)){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  public boolean canMoveLEFT(float playerX, float playerY){
+    if (playerX <= 70){
       return false;
     }
     else{
