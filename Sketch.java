@@ -277,10 +277,22 @@ public class Sketch extends PApplet {
         circleX[i] = random(0, width);
       }
     }
+
+    // FOR TESTING, REMOVE LATER
+    if (mousePressed){
+      playerX = mouseX;
+      playerY = mouseY;
+    }
+    textSize(50);
+    fill(0, 408, 612);
+    text((playerX + "," + playerY),0,50);
   }
 
   public boolean canMoveUP(float playerX, float playerY){
     if (playerY <= 20){
+      return false;
+    }
+    else if(playerX > 183 && playerX < 790 && playerY > 405 && playerY < 410){
       return false;
     }
     else{
@@ -292,6 +304,12 @@ public class Sketch extends PApplet {
     if (playerY >= 724){
       return false;
     }
+    else if (playerX > 183 && playerX < 866 && playerY > 430 && playerY < 435){
+      return false;
+    }
+    else if (playerX > 225 && playerX < 790 && playerY > 330 && playerY < 335){
+      return false;
+    }
     else{
       return true;
     }
@@ -301,16 +319,13 @@ public class Sketch extends PApplet {
     if (playerX >= 1546){
       return false;
     }
-    else if(playerX > 46 && playerY < 690 && playerY > height / 2){
+    else if(playerX > 46 && playerX < 220 && playerY < 690 && playerY > 435){
       return false;
     }
-    else if (playerX > 46 && playerY > 50 && playerY < height / 2 ){
+    else if (playerX > 46 && playerX < 220 && playerY > 50 && playerY < 400 ){
       return false;
     }
-    else if(playerX == 156 && playerY > 120){
-      return false;
-    }
-    else if(playerX == 156 && playerY < 690){
+    else if(playerY < 110 && playerX > 156 && playerX < 210){
       return false;
     }
     else{
@@ -322,10 +337,13 @@ public class Sketch extends PApplet {
     if (playerX <= 30){
       return false;
     }
-    else if (playerX < 156 && playerX > 46 && playerY < 690 && playerY > height / 2){
+    else if (playerX < 156 && playerX > 30 && playerY < 690 && playerY > height / 2){
       return false;
     }
-    else if (playerX < 156 && playerX > 46 && playerY > 50 && playerY < height / 2){
+    else if (playerX < 156 && playerX > 30 && playerY > 50 && playerY < height / 2){
+      return false;
+    }
+    else if (playerX < 230 && playerX > 225 && playerY > 10 && playerY < 335){
       return false;
     }
     else{
