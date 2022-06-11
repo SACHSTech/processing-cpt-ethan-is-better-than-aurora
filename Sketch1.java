@@ -10,6 +10,10 @@ public class Sketch1 extends PApplet {
   PImage imgFlashlightCircle;
   PImage imgRobot;
   PImage imgRobotStill;
+  PImage imgRobotWalkingSheet;
+  PImage [] robotFrames;
+  int intWalkingRobotFrames = 8;
+  int intWalkingFrameWidth = 192 / 3;
 
   // create arrays for the falling rocks
   float[] circleY = new float[5];
@@ -44,10 +48,6 @@ public class Sketch1 extends PApplet {
     size(1640,840);
   }
 
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
   public void setup() {
    // background colour
    background(0, 161, 8);
@@ -58,7 +58,18 @@ public class Sketch1 extends PApplet {
 
    //robot images
    imgRobot = loadImage("RobotSpriteSheet.png");
+
    imgRobotStill = imgRobot.get(0,0,192,256);
+   imgRobotStill.resize(imgRobotStill.width/3, imgRobotStill.height/3);
+
+   imgRobotWalkingSheet = imgRobot.get(0,1024,1536,256);
+   imgRobotWalkingSheet.resize(imgRobotWalkingSheet.width/3, imgRobotWalkingSheet.height/3);
+
+   // robot walking sheet setup
+   robotFrames = new PImage[intWalkingRobotFrames];
+    for(int frameNum = 0; frameNum < robotFrames.length; frameNum++ ){
+      robotFrames[frameNum] = imgRobotWalkingSheet.get(intWalkingFrameWidth*frameNum, 0, intWalkingFrameWidth, imgRobotWalkingSheet.height );
+    }
 
    // set locations for the rocks within the height and width of the screen
    for (int i = 0; i < circleX.length; i++){
@@ -112,7 +123,14 @@ public class Sketch1 extends PApplet {
     rect(1520, 520,10,210);
 
     // player movement controls - ADD METHOD TO DETERMINE IF IT CAN MOVE OR NOT
-    ellipse(playerX, playerY, 80,80);
+
+    if(keyPressed && (key == 'w' || key == 'a' || key == 's' || key == 'd')){
+      image(robotFrames[(frameCount/3)%intWalkingRobotFrames], playerX, playerY);
+    }
+    else{
+      image(imgRobotStill, playerX, playerY);
+    }
+
     if(keyPressed){
       if(key == 'w' && canMoveUP(playerX, playerY) == true){
         playerY -= playerSpeed;
@@ -171,7 +189,7 @@ public class Sketch1 extends PApplet {
   }
 
   public boolean canMoveUP(float playerX, float playerY){
-    if (playerY <= 70){
+    if (playerY <= 20){
       return false;
     }
     else{
@@ -180,7 +198,7 @@ public class Sketch1 extends PApplet {
   }
 
   public boolean canMoveDOWN(float playerX, float playerY){
-    if (playerY >= 770){
+    if (playerY >= 724){
       return false;
     }
     else{
@@ -189,10 +207,19 @@ public class Sketch1 extends PApplet {
   }
 
   public boolean canMoveRIGHT(float playerX, float playerY){
-    if (playerX >= 1570){
+    if (playerX >= 1546){
       return false;
     }
-    else if ((playerX <= 120 && playerY >= 120) || (playerX <= 120 && playerY <= 720)){
+    else if(playerX > 46 && playerY < 690 && playerY > height / 2){
+      return false;
+    }
+    else if (playerX > 46 && playerY > 50 && playerY < height / 2 ){
+      return false;
+    }
+    else if(playerX == 156 && playerY > 120){
+      return false;
+    }
+    else if(playerX == 156 && playerY < 690){
       return false;
     }
     else{
@@ -201,7 +228,13 @@ public class Sketch1 extends PApplet {
   }
 
   public boolean canMoveLEFT(float playerX, float playerY){
-    if (playerX <= 70){
+    if (playerX <= 30){
+      return false;
+    }
+    else if (playerX < 156 && playerX > 46 && playerY < 690 && playerY > height / 2){
+      return false;
+    }
+    else if (playerX < 156 && playerX > 46 && playerY > 50 && playerY < height / 2){
       return false;
     }
     else{
