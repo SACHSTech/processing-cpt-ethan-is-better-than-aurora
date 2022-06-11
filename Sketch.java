@@ -14,6 +14,36 @@ public class Sketch extends PApplet {
   PImage [] robotFrames;
   int intWalkingRobotFrames = 8;
   int intWalkingFrameWidth = 192 / 3;
+  PImage imgRobotFall;
+
+  PImage imgZombie;
+  PImage imgZombieStill;
+  PImage imgZombieAttack;
+  PImage imgZombieWalkingSheet;
+  PImage [] zombieFrames;
+  int intWalkingZombieFrames = 3;
+  
+  // zombie location variables
+  float Zombie1X = 120;
+  float Zombie1Y = 420;
+
+  float Zombie2X = 520;
+  float Zombie2Y = 320;
+
+  float Zombie3X = 620;
+  float Zombie3Y = 720;
+
+  float Zombie4X = 920;
+  float Zombie4Y = 20;
+
+  float Zombie5X = 1220;
+  float Zombie5Y = 420;
+
+  float Zombie1Speed = 3;
+  float Zombie2Speed = 3;
+  float Zombie3Speed = 3;
+  float Zombie4Speed = 3;
+  float Zombie5Speed = 3;
 
   // create arrays for the falling rocks
   float[] circleY = new float[5];
@@ -65,11 +95,32 @@ public class Sketch extends PApplet {
    imgRobotWalkingSheet = imgRobot.get(0,1024,1536,256);
    imgRobotWalkingSheet.resize(imgRobotWalkingSheet.width/3, imgRobotWalkingSheet.height/3);
 
+   imgRobotFall = imgRobot.get(768,768,192,256);
+   imgRobotFall.resize(imgRobotFall.width/3,imgRobotFall.height/3);
+
+   // zombie images
+   imgZombie = loadImage("ZombieSpriteSheet.png");
+
+   imgZombieStill = imgZombie.get(0,0,192,256);
+   imgZombieStill.resize(imgZombieStill.width/3, imgZombieStill.height/3);
+
+   imgZombieAttack = imgZombie.get(384,0,192,256);
+   imgZombieAttack.resize(imgZombieAttack.width/3, imgZombieAttack.height/3);
+
+   imgZombieWalkingSheet = imgZombie.get(0,768,576,256);
+   imgZombieWalkingSheet.resize(imgZombieWalkingSheet.width/3, imgZombieWalkingSheet.height/3);
+
    // robot walking sheet setup
    robotFrames = new PImage[intWalkingRobotFrames];
     for(int frameNum = 0; frameNum < robotFrames.length; frameNum++ ){
       robotFrames[frameNum] = imgRobotWalkingSheet.get(intWalkingFrameWidth*frameNum, 0, intWalkingFrameWidth, imgRobotWalkingSheet.height );
     }
+
+    // zombie walking sheet setup
+   zombieFrames = new PImage[intWalkingZombieFrames];
+   for(int frameNum = 0; frameNum < zombieFrames.length; frameNum++ ){
+     zombieFrames[frameNum] = imgZombieWalkingSheet.get(intWalkingFrameWidth*frameNum, 0, intWalkingFrameWidth, imgZombieWalkingSheet.height );
+   }
 
    // set locations for the rocks within the height and width of the screen
    for (int i = 0; i < circleX.length; i++){
@@ -146,7 +197,18 @@ public class Sketch extends PApplet {
       }
     }
 
-    
+    // zombie 1 movement controls
+    image(zombieFrames[(frameCount/3)%intWalkingZombieFrames], Zombie1X, Zombie1Y);
+    Zombie1X += Zombie1Speed;
+    Zombie1Y += Zombie1Speed;
+   // if statements to prevent zombie from exiting the screen area
+   if (Zombie1X < 0 || Zombie1X > width - imgZombieStill.width){
+    Zombie1Speed *= -1;
+   }
+   if (Zombie1Y < 0 || Zombie1Y > height - imgZombieStill.height){
+    Zombie1Speed *= -1;
+   }
+
 
     
     /*if (canMove(playerX, playerY) == true){
