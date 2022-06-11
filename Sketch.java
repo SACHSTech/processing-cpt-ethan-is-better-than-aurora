@@ -24,7 +24,7 @@ public class Sketch extends PApplet {
   int intWalkingZombieFrames = 3;
   
   // zombie location variables
-  float Zombie1X = 120;
+  float Zombie1X = 150;
   float Zombie1Y = 420;
 
   float Zombie2X = 520;
@@ -33,16 +33,16 @@ public class Sketch extends PApplet {
   float Zombie3X = 620;
   float Zombie3Y = 720;
 
-  float Zombie4X = 920;
+ float Zombie4X = 920;
   float Zombie4Y = 20;
 
   float Zombie5X = 1220;
   float Zombie5Y = 420;
 
-  float Zombie1Speed = 3;
-  float Zombie2Speed = 3;
-  float Zombie3Speed = 3;
-  float Zombie4Speed = 3;
+  float Zombie1Speed = 2;
+ float Zombie2Speed = 3;
+ float Zombie3Speed = 3;
+ float Zombie4Speed = 3;
   float Zombie5Speed = 3;
 
   // create arrays for the falling rocks
@@ -198,36 +198,65 @@ public class Sketch extends PApplet {
     }
 
     // zombie 1 movement controls
-    image(zombieFrames[(frameCount/3)%intWalkingZombieFrames], Zombie1X, Zombie1Y);
-    Zombie1X += Zombie1Speed;
+    
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie1X, Zombie1Y);
     Zombie1Y += Zombie1Speed;
    // if statements to prevent zombie from exiting the screen area
-   if (Zombie1X < 0 || Zombie1X > width - imgZombieStill.width){
-    Zombie1Speed *= -1;
+   if (Zombie1X < 120 || Zombie1X > 220){
+     Zombie1Speed *= -1;
    }
-   if (Zombie1Y < 0 || Zombie1Y > height - imgZombieStill.height){
-    Zombie1Speed *= -1;
+   if (Zombie1Y < 30 || Zombie1Y > 720){
+     Zombie1Speed *= -1;
    }
 
-
+   // zombie 2 movement controls
     
-    /*if (canMove(playerX, playerY) == true){
-      if (keyPressed) {
-        if (key == 'w') {
-          playerY -= playerSpeed;
-        } 
-        else if (key == 'a') {
-          playerX -= playerSpeed;
-        } 
-        else if(key == 's'){
-          playerY += playerSpeed;
-        }
-        else if(key == 'd'){
-          playerX += playerSpeed;
-        }
-      }
-    }*/
+   image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie2X, Zombie2Y);
+   Zombie2X += Zombie2Speed;
+  // if statements to prevent zombie from exiting the screen area
+  if (Zombie2X > 860 || Zombie2X < 240){
+   Zombie2Speed *= -1;
+  }
+  if (Zombie2Y < 320 || Zombie2Y > 450){
+   Zombie2Speed *= -1;
+  }
 
+    // zombie 3 movement controls
+      
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie3X, Zombie3Y);
+    Zombie3X += Zombie3Speed;
+    // if statements to prevent zombie from exiting the screen area
+    if (Zombie3X > 1040 || Zombie3X < 240){
+     Zombie3Speed *= -1;
+    }
+    if (Zombie3Y < 700 || Zombie3Y > 840){
+    Zombie3Speed *= -1;
+    }
+
+    // zombie 4 movement controls
+      
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie4X, Zombie4Y);
+    Zombie4X += Zombie4Speed;
+    // if statements to prevent zombie from exiting the screen area
+    if (Zombie4X > 1556 || Zombie4X < 240){
+      Zombie4Speed *= -1;
+    }
+    if (Zombie4Y < 10 || Zombie4Y > 140){
+      Zombie4Speed *= -1;
+    }
+
+    // zombie 5 movement controls
+    
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie5X, Zombie5Y);
+    Zombie5X += Zombie5Speed;
+    // if statements to prevent zombie from exiting the screen area
+    if (Zombie5X > 1556 || Zombie5X < 940){
+      Zombie5Speed *= -1;
+    }
+    if (Zombie5Y < 400 || Zombie5Y > 600){
+      Zombie5Speed *= -1;
+    }
+ 
     // draw keys
     imgKey.resize(100,100); 
     image(imgKey,120,720);
