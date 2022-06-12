@@ -50,9 +50,15 @@ public class Sketch extends PApplet {
   float[] circleX = new float[5];
   int circleSpeed = 3;
 
+  // Menu Strings
+
+  // Win screen Strings
+  String strWin = "You win!";
+  String strRedo = "Return to menu";
+
   // player location variables
-  float playerX = 50;
-  float playerY = 350;
+  float playerX = -22;
+  float playerY = 316;
   float playerSpeed = 4;
 
   // key locations
@@ -68,8 +74,8 @@ public class Sketch extends PApplet {
   int fourthKeyX = 1350;
   int fourthKeyY = 170;
 
-  // monster locations
-  
+  // key variable
+  int keysCollected = 0;
   // life variable
   int playerlives = 3;
 
@@ -84,7 +90,10 @@ public class Sketch extends PApplet {
 
    // set images 
    imgKey = loadImage("keyImage.png");
-   imgFlashlightCircle = loadImage("FlashlightCircle.png");
+   imgFlashlightCircle = loadImage("flashlightCircle2.png");
+
+   // flashlight circle image 
+   imgFlashlightCircle.resize(imgFlashlightCircle.width * 3, imgFlashlightCircle.height * 3);
 
    //robot images
    imgRobot = loadImage("RobotSpriteSheet.png");
@@ -173,7 +182,16 @@ public class Sketch extends PApplet {
     rect(1220, 720,300,10);
     rect(1520, 520,10,210);
 
-    // player movement controls - ADD METHOD TO DETERMINE IF IT CAN MOVE OR NOT
+    // draw gates
+    fill(122, 81, 13);
+    if(!(keysCollected == 4)){
+      rect(1610,620,10,100);
+    }
+    if(playerX > 20){ 
+    rect(20,320,10,100);
+    }
+    
+    // player movement controls 
 
     if(keyPressed && (key == 'w' || key == 'a' || key == 's' || key == 'd')){
       image(robotFrames[(frameCount/3)%intWalkingRobotFrames], playerX, playerY);
@@ -279,13 +297,19 @@ public class Sketch extends PApplet {
     }
 
     // FOR TESTING, REMOVE LATER
-    if (mousePressed){
-      playerX = mouseX;
-      playerY = mouseY;
-    }
     textSize(50);
     fill(0, 408, 612);
     text((playerX + "," + playerY),0,50);
+
+    // flashlight movement
+    image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 50), ((playerY - imgFlashlightCircle.height/2) + 50 ));
+
+    // win screen 
+    if(playerX >= 1520){
+      playerX +=20;
+      displayWinScreen();
+    }
+
   }
 
   public boolean canMoveUP(float playerX, float playerY){
@@ -293,6 +317,45 @@ public class Sketch extends PApplet {
       return false;
     }
     else if(playerX > 183 && playerX < 790 && playerY > 405 && playerY < 410){
+      return false;
+    }
+    else if(playerX > 270 && playerX < 810 && playerY > 310 && playerY < 315){
+      return false;
+    }
+    else if(playerX > 310 && playerX < 700 && playerY > 80 && playerY < 115){
+      return false;
+    }
+    else if(playerX > 365 && playerX < 715 && playerY > 190 && playerY < 205 ){
+      return false;
+    }
+    else if(playerX > 1020 && playerX < 1500 && playerY > 105 && playerY < 115){
+      return false;
+    }
+    else if(playerX > 1070 && playerX < 1500 && playerY > 195 && playerY < 210){
+      return false;
+    }
+    else if(playerX > 975 && playerX < 1405 && playerY > 290 && playerY < 310){
+      return false;
+    }
+    else if(playerX > 970 && playerX < 1505 && playerY > 390 && playerY < 410){
+      return false;
+    }
+    else if(playerX > 180 && playerX < 915 && playerY > 495 && playerY < 510){
+      return false;
+    }
+    else if(playerX > 270 && playerX < 1000 && playerY > 590 && playerY < 610){
+      return false;
+    }
+    else if(playerX > 205 && playerX < 900 && playerY > 685 && playerY < 700){
+      return false;
+    }
+    else if(playerX > 1005 && playerX < 1560 && playerY > 500 && playerY < 510){
+      return false;
+    }
+    else if(playerX > 1100 && playerX < 1400 && playerY > 560 && playerY < 610 ){
+      return false;
+    }
+    else if(playerX > 1173 && playerX < 1515 && playerY > 690 && playerY < 710){
       return false;
     }
     else{
@@ -310,22 +373,89 @@ public class Sketch extends PApplet {
     else if (playerX > 225 && playerX < 790 && playerY > 330 && playerY < 335){
       return false;
     }
+    else if(playerX > 265 && playerX < 720 && playerY > 30 && playerY < 40){
+      return false;
+    }
+    else if(playerX > 270 && playerX < 795 && playerY > 230 && playerY < 260){
+      return false;
+    }
+    else if(playerX > 375 && playerX < 670 && playerY > 125 && playerY < 155){
+      return false;
+    }
+    else if(playerX > 970 && playerX < 1500 && playerY > 30 && playerY < 45){
+      return false;
+    }
+    else if( playerX > 1060 && playerX < 1520 && playerY > 130 && playerY < 145){
+      return false;
+    }
+    else if(playerX > 1020 && playerX < 1420 && playerY > 220 && playerY < 240){
+      return false;
+    }
+    else if(playerX > 970 && playerX < 1504 && playerY > 330 && playerY < 350){
+      return false;
+    }
+    else if(playerX > 270 && playerX < 980 && playerY > 525 && playerY < 535){
+      return false;
+    }
+    else if(playerX > 205 && playerX < 900 && playerY > 625 && playerY < 645){
+      return false;
+    }
+    else if(playerX > 970 && playerX < 1560 && playerY > 430 && playerY < 440){
+      return false;
+    }
+    else if(playerX > 1070 && playerX < 1400 && playerY > 530 && playerY < 545){
+      return false;
+    }
+    else if(playerX > 1170 && playerX < 1480 && playerY > 630 && playerY < 645){
+      return false; 
+    }
     else{
       return true;
     }
   }
 
   public boolean canMoveRIGHT(float playerX, float playerY){
-    if (playerX >= 1546){
+    if (playerX > 46 && playerX < 220 && playerY < 690 && playerY > 435){
       return false;
     }
-    else if(playerX > 46 && playerX < 220 && playerY < 690 && playerY > 435){
-      return false;
-    }
+    //else if(playerX > 1560 &&(playerY))
     else if (playerX > 46 && playerX < 220 && playerY > 50 && playerY < 400 ){
       return false;
     }
     else if(playerY < 110 && playerX > 156 && playerX < 210){
+      return false;
+    }
+    else if(playerX > 265 && playerX < 270 && playerY > 40 && playerY < 200){
+      return false;
+    }
+    else if(playerX > 260 && playerX < 270 && playerY > 240 && playerY < 300){
+      return false;
+    }
+    else if(playerX > 160 && playerX < 170 && playerY > 690 && playerY < 730){
+      return false;
+    }
+    else if(playerX > 765 && playerX < 780 && playerY > 50 && playerY < 240){
+      return false;
+    }
+    else if(playerX > 660 && playerX < 670 && playerY > 105 && playerY < 160){
+      return false;
+    }
+    else if(playerX > 850 && playerX < 890 && playerY > 45 && playerY < 440){
+      return false;
+    }
+    else if(playerX > 960 && playerX < 970 && playerY > 45 && playerY < 300){
+      return false;
+    }
+    else if(playerX > 1465 && playerX < 1480 && playerY > 160 && playerY < 390){
+      return false;
+    }
+    else if(playerX > 964 && playerX < 980 && playerY > 430 && playerY < 690){
+      return false;
+    }
+    else if(playerX > 1060 && playerX < 1085 && playerY > 550 && playerY < 760){
+      return false;
+    }
+    else if(playerX > 1460 && playerX < 1470 && playerY > 470 && playerY < 670){
       return false;
     }
     else{
@@ -346,8 +476,58 @@ public class Sketch extends PApplet {
     else if (playerX < 230 && playerX > 225 && playerY > 10 && playerY < 335){
       return false;
     }
+    else if (playerX < 830 && playerX > 825 && playerY > 40 && playerY < 300){
+      return false;
+    }
+    else if (playerX < 815 && playerX > 810 && playerY > 325 && playerY < 405){
+      return false;
+    }
+    else if(playerX < 320 && playerX > 315 && playerY > 85 && playerY < 175){
+      return false;
+    }
+    else if(playerX < 725 && playerX > 715 && playerY > 40 && playerY < 195){
+      return false;
+    }
+    else if(playerX < 930 && playerX > 920 && playerY > 40 && playerY < 505){
+      return false;
+    }
+    else if(playerX < 1030 && playerX > 1015 && playerY > 65 && playerY < 270){
+      return false;
+    }
+    else if(playerX < 1515 && playerX > 1500 && playerY > 35 && playerY < 100){
+      return false;
+    }
+    else if(playerX < 1530 && playerX > 1505 && playerY > 130 && playerY < 400){
+      return false;
+    }
+    else if(playerX < 225 && playerX > 215 && playerY > 470 && playerY < 656){
+      return false;
+    }
+    else if(playerX < 1020 && playerX > 1005 && playerY > 460 && playerY < 700 ){
+      return false;
+    }
+    else if(playerX < 1130 && playerX > 1110 && playerY > 580 && playerY < 730){
+      return false;
+    }
+    else if(playerX < 1520 && playerX > 1510 && playerY > 490 && playerY < 700){
+      return false;
+    }
     else{
       return true;
     }
   }
+
+  public void displayWinScreen(){
+    fill(181, 142, 110);
+    rect(20,20,1600,800);
+    textSize(150);
+    fill(0, 408, 612);
+    text(strWin,800,200);
+    rect(800,400,400,200);
+    textSize(50);
+    fill(0, 408, 612);
+    text(strRedo,800,400);
+
+  }
+
 }
