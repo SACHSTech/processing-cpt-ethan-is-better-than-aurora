@@ -24,7 +24,15 @@ public class Sketch extends PApplet {
   int intWalkingZombieFrames = 3;
   int zombieHeight = 86;
   int zombieWidth = 64;
+  PImage imgBackground;
+  PImage imgHeart;
   
+  // main screen images
+  PImage imgInstructionScreen;
+  PImage imgLooseScreen;
+  PImage imgMenuScreen;
+  PImage imgWinScreen;
+
   // zombie location variables
   float Zombie1X = 150;
   float Zombie1Y = 420;
@@ -98,17 +106,25 @@ public class Sketch extends PApplet {
 
   public void setup() {
    // background colour
-   background(0, 161, 8);
+   background(139, 163, 155);
 
    // set images 
    imgKey = loadImage("keyImage.png");
    imgKey.resize(150,100);
-
-
    imgFlashlightCircle = loadImage("flashlightCircle2.png");
+   imgBackground = loadImage("Background.png");
+  // imgBackground.resize(width, height);
+   imgHeart = loadImage("heart.png");
+
+   // main screen images
+   imgInstructionScreen = loadImage("InstructionScreen.png");
+   imgLooseScreen = loadImage("LooseScreen.png");
+   imgMenuScreen = loadImage("MenuScreen.png");
+   imgWinScreen = loadImage("WinScreen.png");
+
 
    // flashlight circle image 
-   imgFlashlightCircle.resize(imgFlashlightCircle.width * 3, imgFlashlightCircle.height * 3);
+   imgFlashlightCircle.resize(imgFlashlightCircle.width * 2, imgFlashlightCircle.height * 2);
 
    //robot images
    imgRobot = loadImage("RobotSpriteSheet.png");
@@ -154,8 +170,19 @@ public class Sketch extends PApplet {
   }
 
   public void draw() {
-	  // background colour
-    background(0, 161, 8);
+	  // draw background
+    int intX = 0;
+    int intY = 0;
+    // loop for location of squares in section 1
+    for(int intRow = 0; intRow < width; intRow+=(imgBackground.width)){
+      for(int intColumn = 0; intColumn < height; intColumn+=(imgBackground.height)){
+        intX = intRow; 
+        intY = intColumn; 
+
+        // drawing for squares in section 1
+        image(imgBackground, intX, intY);
+      }
+    }
 
     // draw maze outlines
     noStroke();
