@@ -22,6 +22,8 @@ public class Sketch extends PApplet {
   PImage imgZombieWalkingSheet;
   PImage [] zombieFrames;
   int intWalkingZombieFrames = 3;
+  int zombieHeight = 86;
+  int zombieWidth = 64;
   
   // zombie location variables
   float Zombie1X = 150;
@@ -56,28 +58,38 @@ public class Sketch extends PApplet {
   String strWin = "You win!";
   String strRedo = "Return to menu";
 
-  // player location variables
+  // player  variables
   float playerX = -22;
   float playerY = 316;
   float playerSpeed = 4;
+  int robotHeight = 86;
+  int robotWidth = 64;
 
   // key locations
-  int firstKeyX = 270;
-  int firstKeyY = 770;
+  int firstKeyX = 120;
+  int firstKeyY = 720;
 
-  int secondKeyX = 470;
-  int secondKeyY = 770;
+  int secondKeyX = 420;
+  int secondKeyY = 720;
 
-  int thirdKeyX = 570;
-  int thirdKeyY = 270;
+  int thirdKeyX = 600;
+  int thirdKeyY = 120;
 
-  int fourthKeyX = 1350;
-  int fourthKeyY = 170;
+  int fourthKeyX = 1200;
+  int fourthKeyY = 120;
 
   // key variable
   int keysCollected = 0;
+  int keyHeight = 100;
+  int keyWidth = 150;
+  boolean showKey1 = true;
+  boolean showKey2 = true;
+  boolean showKey3 = true;
+  boolean showKey4 = true;
+
+
   // life variable
-  int playerlives = 3;
+  int playerLives = 5;
 
   public void settings() {
 	// screen size
@@ -90,6 +102,9 @@ public class Sketch extends PApplet {
 
    // set images 
    imgKey = loadImage("keyImage.png");
+   imgKey.resize(150,100);
+
+
    imgFlashlightCircle = loadImage("flashlightCircle2.png");
 
    // flashlight circle image 
@@ -215,6 +230,8 @@ public class Sketch extends PApplet {
       }
     }
 
+
+
     // zombie 1 movement controls
     
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie1X, Zombie1Y);
@@ -230,7 +247,7 @@ public class Sketch extends PApplet {
    // zombie 2 movement controls
     
    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie2X, Zombie2Y);
-   Zombie2X += Zombie2Speed;
+   //Zombie2X += Zombie2Speed;
   // if statements to prevent zombie from exiting the screen area
   if (Zombie2X > 860 || Zombie2X < 240){
    Zombie2Speed *= -1;
@@ -242,7 +259,7 @@ public class Sketch extends PApplet {
     // zombie 3 movement controls
       
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie3X, Zombie3Y);
-    Zombie3X += Zombie3Speed;
+    //Zombie3X += Zombie3Speed;
     // if statements to prevent zombie from exiting the screen area
     if (Zombie3X > 1040 || Zombie3X < 240){
      Zombie3Speed *= -1;
@@ -254,7 +271,7 @@ public class Sketch extends PApplet {
     // zombie 4 movement controls
       
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie4X, Zombie4Y);
-    Zombie4X += Zombie4Speed;
+    //Zombie4X += Zombie4Speed;
     // if statements to prevent zombie from exiting the screen area
     if (Zombie4X > 1556 || Zombie4X < 240){
       Zombie4Speed *= -1;
@@ -266,7 +283,7 @@ public class Sketch extends PApplet {
     // zombie 5 movement controls
     
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie5X, Zombie5Y);
-    Zombie5X += Zombie5Speed;
+    //Zombie5X += Zombie5Speed;
     // if statements to prevent zombie from exiting the screen area
     if (Zombie5X > 1556 || Zombie5X < 940){
       Zombie5Speed *= -1;
@@ -277,10 +294,18 @@ public class Sketch extends PApplet {
  
     // draw keys
     imgKey.resize(100,100); 
-    image(imgKey,120,720);
-    image(imgKey,420,720); 
-    image(imgKey,600,120); 
-    image(imgKey,1200,120);
+    if (showKey1 == true){
+      image(imgKey,firstKeyX,firstKeyY);
+    }
+    if (showKey2 == true){
+      image(imgKey,secondKeyX,secondKeyY); 
+    }
+    if (showKey3 == true){
+      image(imgKey,thirdKeyX,thirdKeyY); 
+    }
+    if (showKey4 == true){
+      image(imgKey,fourthKeyX,fourthKeyY);
+    }
 
     // draws circle for rocks
     stroke(0);
@@ -296,17 +321,79 @@ public class Sketch extends PApplet {
       }
     }
 
+    // Zombie 1 colission detection
+    if ((playerX > Zombie1X && playerX < Zombie1X + zombieWidth && playerY > Zombie1Y && playerY < Zombie1Y + zombieHeight) || 
+      (playerX + robotWidth > Zombie1X && playerX  + robotWidth < Zombie1X + zombieWidth && playerY  + robotHeight> Zombie1Y && playerY + robotHeight < Zombie1Y + zombieHeight) || 
+      (playerX > Zombie1X + zombieWidth && playerX < Zombie1X + zombieWidth && playerY > Zombie1Y + zombieHeight && playerY < Zombie1Y + zombieHeight) || 
+      (playerX + robotWidth > Zombie1X + zombieWidth && playerX  + robotWidth  < Zombie1X + zombieWidth && playerY  + robotHeight> Zombie1Y + zombieHeight && playerY + robotHeight < Zombie1Y + zombieHeight)){
+      playerLives = playerLives - 1; 
+      playerX = -22;
+      playerY = 316;
+      // method for player died
+    }
+
+    // key 1 colission detection
+    if(showKey1 == true){
+      if ((playerX > firstKeyX && playerX < firstKeyX + keyWidth && playerY > firstKeyY && playerY < firstKeyY + keyHeight) || 
+        (playerX + robotWidth > firstKeyX && playerX  + robotWidth < firstKeyX + keyWidth && playerY  + robotHeight> firstKeyY && playerY + robotHeight < firstKeyY + keyHeight) || 
+        (playerX > firstKeyX + keyWidth && playerX < firstKeyX + keyWidth && playerY > firstKeyY + keyHeight && playerY < firstKeyY + keyHeight) || 
+        (playerX + robotWidth > firstKeyX + keyWidth && playerX  + robotWidth  < firstKeyX + keyWidth && playerY  + robotHeight> firstKeyY + keyHeight && playerY + robotHeight < firstKeyY + keyHeight)){
+        keysCollected = keysCollected + 1;
+        showKey1 = false;
+      } 
+    }
+
+     // key 2 colission detection
+    if(showKey2 == true){
+      if ((playerX > secondKeyX && playerX < secondKeyX + keyWidth && playerY > secondKeyY && playerY < secondKeyY + keyHeight) || 
+        (playerX + robotWidth > secondKeyX && playerX  + robotWidth < secondKeyX + keyWidth && playerY  + robotHeight> secondKeyY && playerY + robotHeight < secondKeyY + keyHeight)  ){
+        keysCollected = keysCollected + 1;
+        showKey2 = false;
+      } 
+    }
+    
+    // key 3 colission detection
+    if(showKey3 == true){
+      if ((playerX > thirdKeyX && playerX < thirdKeyX + keyWidth && playerY > thirdKeyY && playerY < thirdKeyY + keyHeight) || 
+        (playerX + robotWidth > thirdKeyX && playerX  + robotWidth < thirdKeyX + keyWidth && playerY  + robotHeight> thirdKeyY && playerY + robotHeight < thirdKeyY + keyHeight)  ){
+        keysCollected = keysCollected + 1;
+        showKey3 = false;
+      } 
+    }
+
+    // key 4 colission detection
+    if(showKey4 == true){
+      if ((playerX > fourthKeyX && playerX < fourthKeyX + keyWidth && playerY > fourthKeyY && playerY < fourthKeyY + keyHeight) || 
+        (playerX + robotWidth > fourthKeyX && playerX  + robotWidth < fourthKeyX + keyWidth && playerY  + robotHeight> fourthKeyY && playerY + robotHeight < fourthKeyY + keyHeight)  ){
+        keysCollected = keysCollected + 1;
+        showKey4 = false;
+      } 
+    }
+
+
     // FOR TESTING, REMOVE LATER
+
+    if (mousePressed){
+      playerX = mouseX;
+      playerY = mouseY;
+    }
     textSize(50);
     fill(0, 408, 612);
     text((playerX + "," + playerY),0,50);
 
+    // display lives and keys
+    textSize(50);
+    fill(0, 408, 612);
+    text("Lives: " + playerLives ,0,100);
+    text("Keys: " + keysCollected ,0,150);
+
+
     // flashlight movement
-    image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 50), ((playerY - imgFlashlightCircle.height/2) + 50 ));
+    //image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 50), ((playerY - imgFlashlightCircle.height/2) + 50 ));
 
     // win screen 
-    if(playerX >= 1520){
-      playerX +=20;
+    if(playerX >= 1560){
+      //playerX +=20;
       displayWinScreen();
     }
 
@@ -458,6 +545,15 @@ public class Sketch extends PApplet {
     else if(playerX > 1460 && playerX < 1470 && playerY > 470 && playerY < 670){
       return false;
     }
+    else if(playerX > 1550 && playerX < 1560 && playerY > 0 && playerY < 575){
+      return false;
+    }
+    else if(playerX > 1550 && playerX < 1560 && playerY > 640 && playerY < 790){
+      return false;
+    }
+    else if(playerX > 1550 && playerX < 1560 && playerY > 590 && playerY < 640 && keysCollected < 4){
+     return false;
+    }
     else{
       return true;
     }
@@ -510,6 +606,9 @@ public class Sketch extends PApplet {
       return false;
     }
     else if(playerX < 1520 && playerX > 1510 && playerY > 490 && playerY < 700){
+      return false;
+    }
+    else if(playerX < 230 && playerX > 220 && playerY >660 && playerY < 760){
       return false;
     }
     else{
