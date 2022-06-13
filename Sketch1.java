@@ -371,20 +371,19 @@ public class Sketch1 extends PApplet {
       }
     }
 
-
-    // re calculating image
-   playerImageX = playerX - 7;
-   playerImageY = playerY - 26;
-   zombie1ImageX = zombie1X - 7;
-   zombie1ImageY = zombie1Y - 26;
-   zombie2ImageX = zombie2X - 7;
-   zombie2ImageY = zombie2Y - 26;
-   zombie3ImageX = zombie3X - 7;
-   zombie3ImageY = zombie3Y - 26;
-   zombie4ImageX = zombie4X - 7;
-   zombie4ImageY = zombie4Y - 26;
-   zombie5ImageX = zombie5X - 7;
-   zombie5ImageY = zombie5Y - 26;
+    // re-stating calculating image variables
+    playerImageX = playerX - 7;
+    playerImageY = playerY - 26;
+    zombie1ImageX = zombie1X - 7;
+    zombie1ImageY = zombie1Y - 26;
+    zombie2ImageX = zombie2X - 7;
+    zombie2ImageY = zombie2Y - 26;
+    zombie3ImageX = zombie3X - 7;
+    zombie3ImageY = zombie3Y - 26;
+    zombie4ImageX = zombie4X - 7;
+    zombie4ImageY = zombie4Y - 26;
+    zombie5ImageX = zombie5X - 7;
+    zombie5ImageY = zombie5Y - 26;
 
     // Zombie 1 colission detection
     if ((playerImageX > zombie1ImageX && playerImageX < zombie1ImageX + intZombieWidth && playerImageY > zombie1ImageY && playerImageY < zombie1ImageY + intZombieHeight) || 
@@ -468,7 +467,7 @@ public class Sketch1 extends PApplet {
     }
 
     // flashlight movement
-    //image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 35), ((playerY - imgFlashlightCircle.height/2) + 50 ));
+    image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 35), ((playerY - imgFlashlightCircle.height/2) + 50 ));
 
     // draw keys collected
     if(keysCollected == 1){
@@ -539,7 +538,6 @@ public class Sketch1 extends PApplet {
        showKey2 = true;
        showKey3 = true;
        showKey4 = true;
-
       }
     }
 
@@ -561,15 +559,14 @@ public class Sketch1 extends PApplet {
         }
       }
     }
-    testingMethod();
   }
 
  /**
   * Determines if a player can move upwards or not, based on the player's X and Y locations on the screen. 
   * 
-  * @paramplayerX the horizontal location of the player
-  * @paramplayerY the vertical location of the player
-  * @return a boolean value, determining if the player can move up or not. If false, the player can't move up, if true, the player can move up.
+  * @param playerX  the horizontal location of the player
+  * @param playerY  the vertical location of the player
+  * @return a  boolean value, determining if the player can move up or not. If false, the player can't move up, if true, the player can move up.
   * 
   */
   public boolean canMoveUP(float playerX, float playerY){
@@ -632,9 +629,9 @@ public class Sketch1 extends PApplet {
   /**
   * Determines if a player can move downward or not, based on the player's X and Y locations on the screen. 
   * 
-  * @paramplayerX the horizontal location of the player
-  * @paramplayerY the vertical location of the player
-  * @return a boolean value, determining if the player can move down or not. If false, the player can't move down, if true, the player can move down.
+  * @param playerX  the horizontal location of the player
+  * @param playerY  the vertical location of the player
+  * @return  a boolean value, determining if the player can move down or not. If false, the player can't move down, if true, the player can move down.
   * 
   */
   public boolean canMoveDOWN(float playerX, float playerY){
@@ -697,9 +694,9 @@ public class Sketch1 extends PApplet {
   /**
   * Determines if a player can move right or not, based on the player's X and Y locations on the screen. 
   * 
-  * @paramplayerX the horizontal location of the player
-  * @paramplayerY the vertical location of the player
-  * @return a boolean value, determining if the player can move right or not. If false, the player can't move right, if true, the player can move right.
+  * @param playerX  the horizontal location of the player
+  * @param playerY  the vertical location of the player
+  * @return  a boolean value, determining if the player can move right or not. If false, the player can't move right, if true, the player can move right.
   * 
   */
   public boolean canMoveRIGHT(float playerX, float playerY){
@@ -762,9 +759,9 @@ public class Sketch1 extends PApplet {
   /**
   * Determines if a player can move left or not, based on the player's X and Y locations on the screen. 
   * 
-  * @paramplayerX the horizontal location of the player
-  * @paramplayerY the vertical location of the player
-  * @return a boolean value, determining if the player can move right or not. If false, the player can't move right, if true, the player can move right.
+  * @param playerX  the horizontal location of the player
+  * @param playerY  the vertical location of the player
+  * @return  a boolean value, determining if the player can move right or not. If false, the player can't move right, if true, the player can move right.
   * 
   */
   public boolean canMoveLEFT(float playerX, float playerY){
@@ -854,15 +851,5 @@ public class Sketch1 extends PApplet {
       showKey3 = true;
       showKey4 = true;
     }
-  }
-
-  public void testingMethod(){    
-    if (mousePressed){
-      playerX = mouseX;
-      playerY = mouseY;
-    }
-    textSize(50);
-    fill(0, 408, 612);
-    text((playerX + "," + playerY),0,50);
   }
 }
