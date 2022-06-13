@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 /**
+ * In this program, a game is generated where the player has to escape the maze by collecting keys and avoiding falling rocks and zombies using the WASD keys.
 * @author: Ethan Rodrigues and Aurora Chen
 */
 public class Sketch extends PApplet {
@@ -16,15 +17,14 @@ public class Sketch extends PApplet {
   int intWalkingRobotFrames = 8;
   int intWalkingFrameWidth = 192 / 3;
   PImage imgRobotFall;
-
   PImage imgZombie;
   PImage imgZombieStill;
   PImage imgZombieAttack;
   PImage imgZombieWalkingSheet;
   PImage [] zombieFrames;
   int intWalkingZombieFrames = 3;
-  int zombieHeight = 86;
-  int zombieWidth = 64;
+  int intZombieHeight = 86;
+  int intZombieWidth = 64;
   PImage imgBackground;
   PImage imgHeart;
   PImage imgEmptyHeart;
@@ -34,40 +34,34 @@ public class Sketch extends PApplet {
   PImage imgLooseScreen;
   PImage imgMenuScreen;
   PImage imgWinScreen;
-  boolean showingMenu = false;
+  boolean isShowingMenu = false;
 
   // zombie location variables
-  float Zombie1X = 150;
-  float Zombie1Y = 420;
+  float zombie1X = 150;
+  float zombie1Y = 420;
 
-  float Zombie2X = 520;
-  float Zombie2Y = 320;
+  float zombie2X = 520;
+  float zombie2Y = 320;
 
-  float Zombie3X = 620;
-  float Zombie3Y = 720;
+  float zombie3X = 620;
+  float zombie3Y = 720;
 
- float Zombie4X = 920;
-  float Zombie4Y = 20;
+ float zombie4X = 920;
+  float zombie4Y = 20;
 
-  float Zombie5X = 1220;
-  float Zombie5Y = 420;
+  float zombie5X = 1220;
+  float zombie5Y = 420;
 
-  float Zombie1Speed = 2;
- float Zombie2Speed = 3;
- float Zombie3Speed = 3;
- float Zombie4Speed = 3;
-  float Zombie5Speed = 3;
+  float zombie1Speed = 2;
+ float zombie2Speed = 3;
+ float zombie3Speed = 3;
+ float zombie4Speed = 3;
+  float zombie5Speed = 3;
 
   // create arrays for the falling rocks
   float[] circleY = new float[5];
   float[] circleX = new float[5];
-  int circleSpeed = 3;
-
-  // Menu Strings
-
-  // Win screen Strings
-  String strWin = "You win!";
-  String strRedo = "Return to menu";
+  int intCircleSpeed = 3;
 
   // player  variables
   float playerX = -22;
@@ -123,7 +117,6 @@ public class Sketch extends PApplet {
    imgEmptyHeart.resize(30,30);
    imgSmallKey =loadImage("keyImage.png");
    imgSmallKey.resize(75,50);
-
 
 
    // main screen images
@@ -270,62 +263,62 @@ public class Sketch extends PApplet {
 
     // zombie 1 movement controls
     
-    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie1X, Zombie1Y);
-    Zombie1Y += Zombie1Speed;
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie1X, zombie1Y);
+    zombie1Y += zombie1Speed;
    // if statements to prevent zombie from exiting the screen area
-   if (Zombie1X < 120 || Zombie1X > 220){
-     Zombie1Speed *= -1;
+   if (zombie1X < 120 || zombie1X > 220){
+    zombie1Speed *= -1;
    }
-   if (Zombie1Y < 30 || Zombie1Y > 720){
-     Zombie1Speed *= -1;
+   if (zombie1Y < 30 || zombie1Y > 720){
+    zombie1Speed *= -1;
    }
 
    // zombie 2 movement controls
     
-   image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie2X, Zombie2Y);
-   Zombie2X += Zombie2Speed;
+   image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie2X, zombie2Y);
+   zombie2X += zombie2Speed;
   // if statements to prevent zombie from exiting the screen area
-  if (Zombie2X > 860 || Zombie2X < 240){
-   Zombie2Speed *= -1;
+  if (zombie2X > 860 || zombie2X < 240){
+    zombie2Speed *= -1;
   }
-  if (Zombie2Y < 320 || Zombie2Y > 450){
-   Zombie2Speed *= -1;
+  if (zombie2Y < 320 || zombie2Y > 450){
+    zombie2Speed *= -1;
   }
 
     // zombie 3 movement controls
       
-    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie3X, Zombie3Y);
-    Zombie3X += Zombie3Speed;
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie3X, zombie3Y);
+    zombie3X += zombie3Speed;
     // if statements to prevent zombie from exiting the screen area
-    if (Zombie3X > 1040 || Zombie3X < 240){
-     Zombie3Speed *= -1;
+    if (zombie3X > 1040 || zombie3X < 240){
+      zombie3Speed *= -1;
     }
-    if (Zombie3Y < 700 || Zombie3Y > 840){
-    Zombie3Speed *= -1;
+    if (zombie3Y < 700 || zombie3Y > 840){
+      zombie3Speed *= -1;
     }
 
     // zombie 4 movement controls
       
-    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie4X, Zombie4Y);
-    Zombie4X += Zombie4Speed;
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie4X, zombie4Y);
+    zombie4X += zombie4Speed;
     // if statements to prevent zombie from exiting the screen area
-    if (Zombie4X > 1556 || Zombie4X < 240){
-      Zombie4Speed *= -1;
+    if (zombie4X > 1556 || zombie4X < 240){
+      zombie4Speed *= -1;
     }
-    if (Zombie4Y < 10 || Zombie4Y > 140){
-      Zombie4Speed *= -1;
+    if (zombie4Y < 10 || zombie4Y > 140){
+      zombie4Speed *= -1;
     }
 
     // zombie 5 movement controls
     
-    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], Zombie5X, Zombie5Y);
-    Zombie5X += Zombie5Speed;
+    image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie5X, zombie5Y);
+    zombie5X += zombie5Speed;
     // if statements to prevent zombie from exiting the screen area
-    if (Zombie5X > 1556 || Zombie5X < 940){
-      Zombie5Speed *= -1;
+    if (zombie5X > 1556 || zombie5X < 940){
+      zombie5Speed *= -1;
     }
-    if (Zombie5Y < 400 || Zombie5Y > 600){
-      Zombie5Speed *= -1;
+    if (zombie5Y < 400 || zombie5Y > 600){
+      zombie5Speed *= -1;
     }
  
     // draw keys
@@ -348,7 +341,7 @@ public class Sketch extends PApplet {
     for (int i = 0; i < circleY.length; i++){
         fill(156, 104, 50);
         ellipse(circleX[i], circleY[i], 40,40);
-        circleY[i] = circleY[i] + circleSpeed;
+        circleY[i] = circleY[i] + intCircleSpeed;
       
       // makes rocks be redrawn at the top of the screen 
       if (circleY[i] >= height + 50 ){
@@ -358,49 +351,49 @@ public class Sketch extends PApplet {
     }
 
     // Zombie 1 colission detection
-    if ((playerX > Zombie1X && playerX < Zombie1X + zombieWidth && playerY > Zombie1Y && playerY < Zombie1Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie1X && playerX  + robotWidth < Zombie1X + zombieWidth && playerY  + robotHeight> Zombie1Y && playerY + robotHeight < Zombie1Y + zombieHeight) || 
-      (playerX > Zombie1X + zombieWidth && playerX < Zombie1X + zombieWidth && playerY > Zombie1Y + zombieHeight && playerY < Zombie1Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie1X + zombieWidth && playerX  + robotWidth  < Zombie1X + zombieWidth && playerY  + robotHeight> Zombie1Y + zombieHeight && playerY + robotHeight < Zombie1Y + zombieHeight)){
+    if ((playerX > zombie1X && playerX < zombie1X + intZombieWidth && playerY > zombie1Y && playerY < zombie1Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie1X && playerX  + robotWidth < zombie1X + intZombieWidth && playerY  + robotHeight> zombie1Y && playerY + robotHeight < zombie1Y + intZombieHeight) || 
+      (playerX > zombie1X + intZombieWidth && playerX < zombie1X + intZombieWidth && playerY > zombie1Y + intZombieHeight && playerY < zombie1Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie1X + intZombieWidth && playerX  + robotWidth  < zombie1X + intZombieWidth && playerY  + robotHeight> zombie1Y + intZombieHeight && playerY + robotHeight < zombie1Y + intZombieHeight)){
 
           playerLifeLost();
       // method for player died
     }
 
     // Zombie 2 colission detection
-    if ((playerX > Zombie2X && playerX < Zombie2X + zombieWidth && playerY > Zombie2Y && playerY < Zombie2Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie2X && playerX  + robotWidth < Zombie2X + zombieWidth && playerY  + robotHeight> Zombie2Y && playerY + robotHeight < Zombie2Y + zombieHeight) || 
-      (playerX > Zombie2X + zombieWidth && playerX < Zombie2X + zombieWidth && playerY > Zombie2Y + zombieHeight && playerY < Zombie2Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie2X + zombieWidth && playerX  + robotWidth  < Zombie2X + zombieWidth && playerY  + robotHeight> Zombie2Y + zombieHeight && playerY + robotHeight < Zombie2Y + zombieHeight)){
+    if ((playerX > zombie2X && playerX < zombie2X + intZombieWidth && playerY > zombie2Y && playerY < zombie2Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie2X && playerX  + robotWidth < zombie2X + intZombieWidth && playerY  + robotHeight> zombie2Y && playerY + robotHeight < zombie2Y + intZombieHeight) || 
+      (playerX > zombie2X + intZombieWidth && playerX < zombie2X + intZombieWidth && playerY > zombie2Y + intZombieHeight && playerY < zombie2Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie2X + intZombieWidth && playerX  + robotWidth  < zombie2X + intZombieWidth && playerY  + robotHeight> zombie2Y + intZombieHeight && playerY + robotHeight < zombie2Y + intZombieHeight)){
 
           playerLifeLost();
       // method for player died
     }
     // Zombie 3 colission detection
-    if ((playerX > Zombie3X && playerX < Zombie3X + zombieWidth && playerY > Zombie3Y && playerY < Zombie3Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie3X && playerX  + robotWidth < Zombie3X + zombieWidth && playerY  + robotHeight> Zombie3Y && playerY + robotHeight < Zombie3Y + zombieHeight) || 
-      (playerX > Zombie3X + zombieWidth && playerX < Zombie3X + zombieWidth && playerY > Zombie3Y + zombieHeight && playerY < Zombie3Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie3X + zombieWidth && playerX  + robotWidth  < Zombie3X + zombieWidth && playerY  + robotHeight> Zombie3Y + zombieHeight && playerY + robotHeight < Zombie3Y + zombieHeight)){
+    if ((playerX > zombie3X && playerX < zombie3X + intZombieWidth && playerY > zombie3Y && playerY < zombie3Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie3X && playerX  + robotWidth < zombie3X + intZombieWidth && playerY  + robotHeight> zombie3Y && playerY + robotHeight < zombie3Y + intZombieHeight) || 
+      (playerX > zombie3X + intZombieWidth && playerX < zombie3X + intZombieWidth && playerY > zombie3Y + intZombieHeight && playerY < zombie3Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie3X + intZombieWidth && playerX  + robotWidth  < zombie3X + intZombieWidth && playerY  + robotHeight> zombie3Y + intZombieHeight && playerY + robotHeight < zombie3Y + intZombieHeight)){
 
           playerLifeLost();
       // method for player died
     }
 
     // Zombie 4 colission detection
-    if ((playerX > Zombie4X && playerX < Zombie4X + zombieWidth && playerY > Zombie4Y && playerY < Zombie4Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie4X && playerX  + robotWidth < Zombie4X + zombieWidth && playerY  + robotHeight> Zombie4Y && playerY + robotHeight < Zombie4Y + zombieHeight) || 
-      (playerX > Zombie4X + zombieWidth && playerX < Zombie4X + zombieWidth && playerY > Zombie4Y + zombieHeight && playerY < Zombie4Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie4X + zombieWidth && playerX  + robotWidth  < Zombie4X + zombieWidth && playerY  + robotHeight> Zombie4Y + zombieHeight && playerY + robotHeight < Zombie4Y + zombieHeight)){
+    if ((playerX > zombie4X && playerX < zombie4X + intZombieWidth && playerY > zombie4Y && playerY < zombie4Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie4X && playerX  + robotWidth < zombie4X + intZombieWidth && playerY  + robotHeight> zombie4Y && playerY + robotHeight < zombie4Y + intZombieHeight) || 
+      (playerX > zombie4X + intZombieWidth && playerX < zombie4X + intZombieWidth && playerY > zombie4Y + intZombieHeight && playerY < zombie4Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie4X + intZombieWidth && playerX  + robotWidth  < zombie4X + intZombieWidth && playerY  + robotHeight> zombie4Y + intZombieHeight && playerY + robotHeight < zombie4Y + intZombieHeight)){
 
           playerLifeLost();
       // method for player died
     }
 
     // Zombie 5 colission detection
-    if ((playerX > Zombie5X && playerX < Zombie5X + zombieWidth && playerY > Zombie5Y && playerY < Zombie5Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie5X && playerX  + robotWidth < Zombie5X + zombieWidth && playerY  + robotHeight> Zombie5Y && playerY + robotHeight < Zombie5Y + zombieHeight) || 
-      (playerX > Zombie5X + zombieWidth && playerX < Zombie5X + zombieWidth && playerY > Zombie5Y + zombieHeight && playerY < Zombie5Y + zombieHeight) || 
-      (playerX + robotWidth > Zombie5X + zombieWidth && playerX  + robotWidth  < Zombie5X + zombieWidth && playerY  + robotHeight> Zombie5Y + zombieHeight && playerY + robotHeight < Zombie4Y + zombieHeight)){
+    if ((playerX > zombie5X && playerX < zombie5X + intZombieWidth && playerY > zombie5Y && playerY < zombie5Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie5X && playerX  + robotWidth < zombie5X + intZombieWidth && playerY  + robotHeight> zombie5Y && playerY + robotHeight < zombie5Y + intZombieHeight) || 
+      (playerX > zombie5X + intZombieWidth && playerX < zombie5X + intZombieWidth && playerY > zombie5Y + intZombieHeight && playerY < zombie5Y + intZombieHeight) || 
+      (playerX + robotWidth > zombie5X + intZombieWidth && playerX  + robotWidth  < zombie5X + intZombieWidth && playerY  + robotHeight> zombie5Y + intZombieHeight && playerY + robotHeight < zombie4Y + intZombieHeight)){
 
           playerLifeLost();
       // method for player died
@@ -519,8 +512,6 @@ public class Sketch extends PApplet {
       }
     }
 
-
-
     // win screen 
     if(playerX >= 1560){
       displayWinScreen();
@@ -529,7 +520,7 @@ public class Sketch extends PApplet {
     // menu screen 
     if(playerX == -22 && playerY == 316){
       image(imgMenuScreen,0,0);
-      showingMenu = true;
+      isShowingMenu = true;
       image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], 720, 360);
       image(robotFrames[(frameCount/3)%intWalkingRobotFrames], 850, 360);
 
@@ -541,7 +532,8 @@ public class Sketch extends PApplet {
 
     }
 
-  // FOR TESTING, REMOVE LATER
+  // FOR TESTING, REMOVE LATER 
+  /* 
    text((playerX + "," + playerY),0,50);
   
     if (mousePressed){
@@ -551,7 +543,7 @@ public class Sketch extends PApplet {
      textSize(50);
     fill(0, 408, 612);
     text((playerX + "," + playerY),0,50);
-    
+    */
   }
 
   public boolean canMoveUP(float playerX, float playerY){
@@ -782,7 +774,6 @@ public class Sketch extends PApplet {
 
   public void displayWinScreen(){
     image(imgWinScreen,0,0);
-
   }
   
   public void playerLifeLost(){
