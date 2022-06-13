@@ -30,8 +30,11 @@ public class Sketch1 extends PApplet {
   float playerX = -22;
   float playerY = 316;
   float playerSpeed = 5;
-  int robotHeight = 86;
-  int robotWidth = 64;
+  int robotHeight = 60;
+  int robotWidth = 50;
+
+  float playerImageX = playerX - 7;
+  float playerImageY = playerY - 26;
 
   int playerLives = 5;
 
@@ -44,23 +47,33 @@ public class Sketch1 extends PApplet {
 
   // declare zombie variables
   int intWalkingZombieFrames = 3;
-  int intZombieHeight = 86;
-  int intZombieWidth = 64;
+  int intZombieHeight = 60;
+  int intZombieWidth = 50;
 
   float zombie1X = 150;
   float zombie1Y = 420;
+  float zombie1ImageX = zombie1X - 7;
+  float zombie1ImageY = zombie1Y - 26;
 
   float zombie2X = 520;
   float zombie2Y = 320;
+  float zombie2ImageX = zombie2X - 7;
+  float zombie2ImageY = zombie2Y - 26;
 
   float zombie3X = 620;
   float zombie3Y = 720;
+  float zombie3ImageX = zombie3X - 7;
+  float zombie3ImageY = zombie3Y - 26;
 
   float zombie4X = 920;
   float zombie4Y = 20;
+  float zombie4ImageX = zombie4X - 7;
+  float zombie4ImageY = zombie4Y - 26;
 
   float zombie5X = 1220;
   float zombie5Y = 420;
+  float zombie5ImageX = zombie5X - 7;
+  float zombie5ImageY = zombie5Y - 26;
 
   float zombie1Speed = 2;
   float zombie2Speed = 3;
@@ -77,8 +90,8 @@ public class Sketch1 extends PApplet {
   boolean isShowingMenu = false;
 
   // arrays for the falling rocks
-  float[] circleY = new float[5];
-  float[] circleX = new float[5];
+  float[] circleY = new float[2];
+  float[] circleX = new float[2];
   int intCircleSpeed = 3;
 
   // key location variables
@@ -96,8 +109,8 @@ public class Sketch1 extends PApplet {
 
   // key collection variables
   int keysCollected = 0;
-  int keyHeight = 100;
-  int keyWidth = 100;
+  int keyHeight = 50;
+  int keyWidth = 85;
   boolean showKey1 = true;
   boolean showKey2 = true;
   boolean showKey3 = true;
@@ -274,7 +287,7 @@ public class Sketch1 extends PApplet {
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie1X, zombie1Y);
     zombie1Y += zombie1Speed;
 
-    // prevent zombie from exiting the desired area
+    // prevent zombie 1 from exiting the desired area
     if (zombie1X < 120 || zombie1X > 220){
      zombie1Speed *= -1;
     }
@@ -358,52 +371,73 @@ public class Sketch1 extends PApplet {
       }
     }
 
+
+    // re calculating image
+   playerImageX = playerX - 7;
+   playerImageY = playerY - 26;
+   zombie1ImageX = zombie1X - 7;
+   zombie1ImageY = zombie1Y - 26;
+   zombie2ImageX = zombie2X - 7;
+   zombie2ImageY = zombie2Y - 26;
+   zombie3ImageX = zombie3X - 7;
+   zombie3ImageY = zombie3Y - 26;
+   zombie4ImageX = zombie4X - 7;
+   zombie4ImageY = zombie4Y - 26;
+   zombie5ImageX = zombie5X - 7;
+   zombie5ImageY = zombie5Y - 26;
+
     // Zombie 1 colission detection
-    if ((playerX > zombie1X && playerX < zombie1X + intZombieWidth && playerY > zombie1Y && playerY < zombie1Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie1X && playerX  + robotWidth < zombie1X + intZombieWidth && playerY  + robotHeight> zombie1Y && playerY + robotHeight < zombie1Y + intZombieHeight) || 
-    (playerX > zombie1X + intZombieWidth && playerX < zombie1X + intZombieWidth && playerY > zombie1Y + intZombieHeight && playerY < zombie1Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie1X + intZombieWidth && playerX  + robotWidth  < zombie1X + intZombieWidth && playerY  + robotHeight> zombie1Y + intZombieHeight && playerY + robotHeight < zombie1Y + intZombieHeight)){
+    if ((playerImageX > zombie1ImageX && playerImageX < zombie1ImageX + intZombieWidth && playerImageY > zombie1ImageY && playerImageY < zombie1ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie1ImageX && playerImageX  + robotWidth < zombie1ImageX + intZombieWidth && playerImageY  + robotHeight> zombie1ImageY && playerImageY + robotHeight < zombie1ImageY + intZombieHeight) || 
+    (playerImageX > zombie1ImageX + intZombieWidth && playerImageX < zombie1ImageX + intZombieWidth && playerImageY > zombie1ImageY + intZombieHeight && playerImageY < zombie1ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie1ImageX + intZombieWidth && playerImageX  + robotWidth  < zombie1ImageX + intZombieWidth && playerImageY  + robotHeight> zombie1ImageY + intZombieHeight && playerImageY + robotHeight < zombie1ImageY + intZombieHeight)){
       playerLifeLost();
     }
 
     // Zombie 2 colission detection
-    if ((playerX > zombie2X && playerX < zombie2X + intZombieWidth && playerY > zombie2Y && playerY < zombie2Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie2X && playerX  + robotWidth < zombie2X + intZombieWidth && playerY  + robotHeight> zombie2Y && playerY + robotHeight < zombie2Y + intZombieHeight) || 
-    (playerX > zombie2X + intZombieWidth && playerX < zombie2X + intZombieWidth && playerY > zombie2Y + intZombieHeight && playerY < zombie2Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie2X + intZombieWidth && playerX  + robotWidth  < zombie2X + intZombieWidth && playerY  + robotHeight> zombie2Y + intZombieHeight && playerY + robotHeight < zombie2Y + intZombieHeight)){
+    if ((playerImageX > zombie2ImageX && playerImageX < zombie2ImageX + intZombieWidth && playerImageY > zombie2ImageY && playerImageY < zombie2ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie2ImageX && playerImageX  + robotWidth < zombie2ImageX + intZombieWidth && playerImageY  + robotHeight> zombie2ImageY && playerImageY + robotHeight < zombie2ImageY + intZombieHeight) || 
+    (playerImageX > zombie2ImageX + intZombieWidth && playerImageX < zombie2ImageX + intZombieWidth && playerImageY > zombie2ImageY + intZombieHeight && playerImageY < zombie2ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie2ImageX + intZombieWidth && playerImageX  + robotWidth  < zombie2ImageX + intZombieWidth && playerImageY  + robotHeight> zombie2ImageY + intZombieHeight && playerImageY + robotHeight < zombie2ImageY + intZombieHeight)){
       playerLifeLost();
     }
 
     // Zombie 3 colission detection
-    if ((playerX > zombie3X && playerX < zombie3X + intZombieWidth && playerY > zombie3Y && playerY < zombie3Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie3X && playerX  + robotWidth < zombie3X + intZombieWidth && playerY  + robotHeight> zombie3Y && playerY + robotHeight < zombie3Y + intZombieHeight) || 
-    (playerX > zombie3X + intZombieWidth && playerX < zombie3X + intZombieWidth && playerY > zombie3Y + intZombieHeight && playerY < zombie3Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie3X + intZombieWidth && playerX  + robotWidth  < zombie3X + intZombieWidth && playerY  + robotHeight> zombie3Y + intZombieHeight && playerY + robotHeight < zombie3Y + intZombieHeight)){
+    if ((playerImageX > zombie3ImageX && playerImageX < zombie3ImageX + intZombieWidth && playerImageY > zombie3ImageY && playerImageY < zombie3ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie3ImageX && playerImageX  + robotWidth < zombie3ImageX + intZombieWidth && playerImageY  + robotHeight> zombie3ImageY && playerImageY + robotHeight < zombie3ImageY + intZombieHeight) || 
+    (playerImageX > zombie3ImageX + intZombieWidth && playerImageX < zombie3ImageX + intZombieWidth && playerImageY > zombie3ImageY + intZombieHeight && playerImageY < zombie3ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie3ImageX + intZombieWidth && playerImageX  + robotWidth  < zombie3ImageX + intZombieWidth && playerImageY  + robotHeight> zombie3ImageY + intZombieHeight && playerImageY + robotHeight < zombie3ImageY + intZombieHeight)){
       playerLifeLost();
     }
 
     // Zombie 4 colission detection
-    if ((playerX > zombie4X && playerX < zombie4X + intZombieWidth && playerY > zombie4Y && playerY < zombie4Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie4X && playerX  + robotWidth < zombie4X + intZombieWidth && playerY  + robotHeight> zombie4Y && playerY + robotHeight < zombie4Y + intZombieHeight) || 
-    (playerX > zombie4X + intZombieWidth && playerX < zombie4X + intZombieWidth && playerY > zombie4Y + intZombieHeight && playerY < zombie4Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie4X + intZombieWidth && playerX  + robotWidth  < zombie4X + intZombieWidth && playerY  + robotHeight> zombie4Y + intZombieHeight && playerY + robotHeight < zombie4Y + intZombieHeight)){
+    if ((playerImageX > zombie4ImageX && playerImageX < zombie4ImageX + intZombieWidth && playerImageY > zombie4ImageY && playerImageY < zombie4ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie4ImageX && playerImageX  + robotWidth < zombie4ImageX + intZombieWidth && playerImageY  + robotHeight> zombie4ImageY && playerImageY + robotHeight < zombie4ImageY + intZombieHeight) || 
+    (playerImageX > zombie4ImageX + intZombieWidth && playerImageX < zombie4ImageX + intZombieWidth && playerImageY > zombie4ImageY + intZombieHeight && playerImageY < zombie4ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie4ImageX + intZombieWidth && playerImageX  + robotWidth  < zombie4ImageX + intZombieWidth && playerImageY  + robotHeight> zombie4ImageY + intZombieHeight && playerImageY + robotHeight < zombie4ImageY + intZombieHeight)){
       playerLifeLost();
     }
 
     // Zombie 5 colission detection
-    if ((playerX > zombie5X && playerX < zombie5X + intZombieWidth && playerY > zombie5Y && playerY < zombie5Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie5X && playerX  + robotWidth < zombie5X + intZombieWidth && playerY  + robotHeight> zombie5Y && playerY + robotHeight < zombie5Y + intZombieHeight) || 
-    (playerX > zombie5X + intZombieWidth && playerX < zombie5X + intZombieWidth && playerY > zombie5Y + intZombieHeight && playerY < zombie5Y + intZombieHeight) || 
-    (playerX + robotWidth > zombie5X + intZombieWidth && playerX  + robotWidth  < zombie5X + intZombieWidth && playerY  + robotHeight> zombie5Y + intZombieHeight && playerY + robotHeight < zombie4Y + intZombieHeight)){
+    if ((playerImageX > zombie5ImageX && playerImageX < zombie5ImageX + intZombieWidth && playerImageY > zombie5ImageY && playerImageY < zombie5ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie5ImageX && playerImageX  + robotWidth < zombie5ImageX + intZombieWidth && playerImageY  + robotHeight> zombie5ImageY && playerImageY + robotHeight < zombie5ImageY + intZombieHeight) || 
+    (playerImageX > zombie5ImageX + intZombieWidth && playerImageX < zombie5ImageX + intZombieWidth && playerImageY > zombie5ImageY + intZombieHeight && playerImageY < zombie5ImageY + intZombieHeight) || 
+    (playerImageX + robotWidth > zombie5ImageX + intZombieWidth && playerImageX  + robotWidth  < zombie5ImageX + intZombieWidth && playerImageY  + robotHeight> zombie5ImageY + intZombieHeight && playerImageY + robotHeight < zombie5ImageY + intZombieHeight)){
       playerLifeLost();
+    }
+
+    // Rock colission detection
+    for (int i = 0; i < circleY.length; i++){
+      if ((playerImageX <= circleX[i] + 40) && (playerImageX >= circleX[i] - 40)){
+        if((playerImageY <= circleY[i] + 40) && (playerImageY >= circleY[i] - 40)){
+          playerLifeLost();
+        }
+      }
     }
 
     // key 1 colission detection
     if(showKey1 == true){
-      if ((playerX > firstKeyX && playerX < firstKeyX + keyWidth && playerY > firstKeyY && playerY < firstKeyY + keyHeight) || 
-      (playerX + robotWidth > firstKeyX && playerX  + robotWidth < firstKeyX + keyWidth && playerY  + robotHeight> firstKeyY && playerY + robotHeight < firstKeyY + keyHeight) || 
-      (playerX > firstKeyX + keyWidth && playerX < firstKeyX + keyWidth && playerY > firstKeyY + keyHeight && playerY < firstKeyY + keyHeight) || 
-      (playerX + robotWidth > firstKeyX + keyWidth && playerX  + robotWidth  < firstKeyX + keyWidth && playerY  + robotHeight> firstKeyY + keyHeight && playerY + robotHeight < firstKeyY + keyHeight)){
+      if (playerX > 73 && playerX < 165 && playerY > 660 && playerY < 800){
         keysCollected = keysCollected + 1;
         showKey1 = false;
       } 
@@ -411,8 +445,7 @@ public class Sketch1 extends PApplet {
 
     // key 2 colission detection
     if(showKey2 == true){
-      if ((playerX > secondKeyX && playerX < secondKeyX + keyWidth && playerY > secondKeyY && playerY < secondKeyY + keyHeight) || 
-      (playerX + robotWidth > secondKeyX && playerX  + robotWidth < secondKeyX + keyWidth && playerY  + robotHeight> secondKeyY && playerY + robotHeight < secondKeyY + keyHeight)  ){
+      if (playerX > 370 && playerX < 505 && playerY > 680 && playerY < 725){
         keysCollected = keysCollected + 1;
         showKey2 = false;
       } 
@@ -420,8 +453,7 @@ public class Sketch1 extends PApplet {
     
     // key 3 colission detection
     if(showKey3 == true){
-      if ((playerX > thirdKeyX && playerX < thirdKeyX + keyWidth && playerY > thirdKeyY && playerY < thirdKeyY + keyHeight) || 
-      (playerX + robotWidth > thirdKeyX && playerX  + robotWidth < thirdKeyX + keyWidth && playerY  + robotHeight> thirdKeyY && playerY + robotHeight < thirdKeyY + keyHeight)  ){
+      if (playerX > 550 && playerX < 650 && playerY > 100 && playerY < 140){
         keysCollected = keysCollected + 1;
         showKey3 = false;
       } 
@@ -429,15 +461,14 @@ public class Sketch1 extends PApplet {
 
     // key 4 colission detection
     if(showKey4 == true){
-      if ((playerX > fourthKeyX && playerX < fourthKeyX + keyWidth && playerY > fourthKeyY && playerY < fourthKeyY + keyHeight) || 
-      (playerX + robotWidth > fourthKeyX && playerX  + robotWidth < fourthKeyX + keyWidth && playerY  + robotHeight> fourthKeyY && playerY + robotHeight < fourthKeyY + keyHeight)  ){
+      if (playerX > 1150 && playerX < 1280 && playerY > 100 && playerY < 130){
         keysCollected = keysCollected + 1;
         showKey4 = false;
       } 
     }
 
     // flashlight movement
-    image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 50), ((playerY - imgFlashlightCircle.height/2) + 50 ));
+    //image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 35), ((playerY - imgFlashlightCircle.height/2) + 50 ));
 
     // draw keys collected
     if(keysCollected == 1){
@@ -530,19 +561,7 @@ public class Sketch1 extends PApplet {
         }
       }
     }
-
-    // FOR TESTING, REMOVE LATER 
-    /* 
-    text((playerX + "," + playerY),0,50);
-    
-      if (mousePressed){
-        playerX = mouseX;
-        playerY = mouseY;
-      }
-      textSize(50);
-      fill(0, 408, 612);
-      text((playerX + "," + playerY),0,50);
-      */
+    testingMethod();
   }
 
  /**
@@ -555,6 +574,9 @@ public class Sketch1 extends PApplet {
   */
   public boolean canMoveUP(float playerX, float playerY){
     if (playerY <= 20){
+      return false;
+    }
+    else if(playerX > 70 && playerX < 110 && playerY > 690 && playerY < 695){
       return false;
     }
     else if(playerX > 183 && playerX < 790 && playerY > 405 && playerY < 410){
@@ -619,6 +641,9 @@ public class Sketch1 extends PApplet {
     if (playerY >= 724){
       return false;
     }
+    else if (playerX > 75 && playerX < 110 && playerY > 30 && playerY < 35){
+      return false;
+    }
     else if (playerX > 183 && playerX < 866 && playerY > 430 && playerY < 435){
       return false;
     }
@@ -678,14 +703,13 @@ public class Sketch1 extends PApplet {
   * 
   */
   public boolean canMoveRIGHT(float playerX, float playerY){
-    if (playerX > 46 && playerX < 220 && playerY < 690 && playerY > 435){
+    if (playerX > 60 && playerX < 70 && playerY < 690 && playerY > 50){
       return false;
     }
-    //else if(playerX > 1560 &&(playerY))
-    else if (playerX > 70 && playerX < 220 && playerY > 50 && playerY < 400 ){
+    else if (playerX > 65 && playerX < 70 && playerY > 50 && playerY < 680 ){
       return false;
     }
-    else if(playerY < 110 && playerX > 156 && playerX < 210){
+    else if(playerX > 160 && playerX < 165 && playerY > -20 && playerY < 390){
       return false;
     }
     else if(playerX > 265 && playerX < 270 && playerY > 40 && playerY < 200){
@@ -694,7 +718,7 @@ public class Sketch1 extends PApplet {
     else if(playerX > 260 && playerX < 270 && playerY > 240 && playerY < 300){
       return false;
     }
-    else if(playerX > 160 && playerX < 170 && playerY > 690 && playerY < 730){
+    else if(playerX > 160 && playerX < 170 && playerY > 430 && playerY < 740){
       return false;
     }
     else if(playerX > 765 && playerX < 780 && playerY > 50 && playerY < 240){
@@ -747,13 +771,10 @@ public class Sketch1 extends PApplet {
     if (playerX <= 30){
       return false;
     }
-    else if (playerX < 156 && playerX > 20 && playerY < 690 && playerY > height / 2){
+    else if (playerX < 20 && playerX > 25 && playerY > 0 && playerY < 730){
       return false;
     }
-    else if (playerX < 156 && playerX > 20 && playerY > 50 && playerY < height / 2){
-      return false;
-    }
-    else if (playerX < 230 && playerX > 225 && playerY > 10 && playerY < 335){
+    else if (playerX > 125 && playerX < 130 && playerY > 40 && playerY < 690){
       return false;
     }
     else if (playerX < 830 && playerX > 825 && playerY > 40 && playerY < 300){
@@ -833,5 +854,15 @@ public class Sketch1 extends PApplet {
       showKey3 = true;
       showKey4 = true;
     }
+  }
+
+  public void testingMethod(){    
+    if (mousePressed){
+      playerX = mouseX;
+      playerY = mouseY;
+    }
+    textSize(50);
+    fill(0, 408, 612);
+    text((playerX + "," + playerY),0,50);
   }
 }
