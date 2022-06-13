@@ -832,6 +832,6 @@ public class Sketch extends PApplet {
       showKey2 = true;
       showKey3 = true;
       showKey4 = true;
-     }
+    }
   }
 }
