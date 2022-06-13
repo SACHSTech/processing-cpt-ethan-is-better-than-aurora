@@ -24,12 +24,6 @@ public class Sketch2 extends PApplet {
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
-  public void draw() {
-	  
-	// sample code, delete this stuff
-    rect(100, 100, 250, 25);
-    rect(a, b, c, d);
-  }
   
   // define other methods down here.
 }
