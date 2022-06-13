@@ -7,6 +7,7 @@ public class Sketch extends PApplet {
 
   // import images
   PImage imgKey;
+  PImage imgSmallKey;
   PImage imgFlashlightCircle;
   PImage imgRobot;
   PImage imgRobotStill;
@@ -26,12 +27,14 @@ public class Sketch extends PApplet {
   int zombieWidth = 64;
   PImage imgBackground;
   PImage imgHeart;
+  PImage imgEmptyHeart;
   
   // main screen images
   PImage imgInstructionScreen;
   PImage imgLooseScreen;
   PImage imgMenuScreen;
   PImage imgWinScreen;
+  boolean showingMenu = false;
 
   // zombie location variables
   float Zombie1X = 150;
@@ -115,6 +118,13 @@ public class Sketch extends PApplet {
    imgBackground = loadImage("Background.png");
   // imgBackground.resize(width, height);
    imgHeart = loadImage("heart.png");
+   imgHeart.resize(30,30);
+   imgEmptyHeart = loadImage("EmptyHeart.png");
+   imgEmptyHeart.resize(30,30);
+   imgSmallKey =loadImage("keyImage.png");
+   imgSmallKey.resize(75,50);
+
+
 
    // main screen images
    imgInstructionScreen = loadImage("InstructionScreen.png");
@@ -434,26 +444,82 @@ public class Sketch extends PApplet {
       } 
     }
 
-
-    // FOR TESTING, REMOVE LATER
-
-    if (mousePressed){
-      playerX = mouseX;
-      playerY = mouseY;
-    }
-    textSize(50);
-    fill(0, 408, 612);
-    text((playerX + "," + playerY),0,50);
-
-    // display lives and keys
-    textSize(50);
-    fill(0, 408, 612);
-    text("Lives: " + playerLives ,0,100);
-    text("Keys: " + keysCollected ,0,150);
-
-
     // flashlight movement
     image(imgFlashlightCircle, ((playerX - imgFlashlightCircle.width/2 ) + 50), ((playerY - imgFlashlightCircle.height/2) + 50 ));
+
+    // draw lives and keys collected
+    if(keysCollected == 1){
+      image(imgSmallKey,1555,780);
+    }
+    else if(keysCollected == 2){
+      image(imgSmallKey,1555,780);
+      image(imgSmallKey,1480,780);
+    }
+    else if(keysCollected == 3){
+      image(imgSmallKey,1555,780);
+      image(imgSmallKey,1480,780);
+      image(imgSmallKey,1405,780);
+    }
+    else if(keysCollected == 4){
+      image(imgSmallKey,1555,780);
+      image(imgSmallKey,1480,780);
+      image(imgSmallKey,1405,780);
+      image(imgSmallKey,1330,780);
+    }
+
+    if(playerLives == 5){
+      image(imgHeart,10,10);
+      image(imgHeart,40,10);
+      image(imgHeart,70,10);
+      image(imgHeart,100,10);
+      image(imgHeart,130,10);
+    }
+    else if(playerLives == 4){
+      image(imgHeart,10,10);
+      image(imgHeart,40,10);
+      image(imgHeart,70,10);
+      image(imgHeart,100,10);
+      image(imgEmptyHeart,130,10);
+    }
+    else if(playerLives == 3){
+      image(imgHeart,10,10);
+      image(imgHeart,40,10);
+      image(imgHeart,70,10);
+      image(imgEmptyHeart,100,10);
+      image(imgEmptyHeart,130,10);
+    }
+    else if(playerLives == 2){
+      image(imgHeart,10,10);
+      image(imgHeart,40,10);
+      image(imgEmptyHeart,70,10);
+      image(imgEmptyHeart,100,10);
+      image(imgEmptyHeart,130,10);
+    }
+    else if(playerLives == 1){
+      image(imgHeart,10,10);
+      image(imgEmptyHeart,40,10);
+      image(imgEmptyHeart,70,10);
+      image(imgEmptyHeart,100,10);
+      image(imgEmptyHeart,130,10);
+    }
+    else if(playerLives == 0){
+      fill(139, 163, 155);
+      rect(0,0,1640,840);
+      image(imgLooseScreen,0,0);
+      if(mousePressed && playerLives == 0){
+       keysCollected = 0;
+       playerLives = 5;
+       playerX = -22;
+       playerY = 316;
+       showKey1 = true;
+       showKey2 = true;
+       showKey3 = true;
+       showKey4 = true;
+
+      }
+    }
+
+
 
     // win screen 
     if(playerX >= 1560){
@@ -462,18 +528,30 @@ public class Sketch extends PApplet {
 
     // menu screen 
     if(playerX == -22 && playerY == 316){
-    fill(181, 142, 110);
-    rect(20,20,1600,800);
-    textSize(150);
-    fill(0, 408, 612);
-    text("Press the W, A, S or D key to move",800,200);
-    rect(800,400,400,200);
-    textSize(50);
-    fill(0, 408, 612);
-    text(strRedo,800,400);
+      image(imgMenuScreen,0,0);
+      showingMenu = true;
+      image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], 720, 360);
+      image(robotFrames[(frameCount/3)%intWalkingRobotFrames], 850, 360);
+
+      if(mousePressed){
+        if(mouseX > 470 && mouseX < 1170 && mouseY > 600 && mouseY < 710){
+          image(imgInstructionScreen,0,0);
+        }
+      }
 
     }
 
+  // FOR TESTING, REMOVE LATER
+   text((playerX + "," + playerY),0,50);
+  
+    if (mousePressed){
+      playerX = mouseX;
+      playerY = mouseY;
+    }
+     textSize(50);
+    fill(0, 408, 612);
+    text((playerX + "," + playerY),0,50);
+    
   }
 
   public boolean canMoveUP(float playerX, float playerY){
@@ -520,6 +598,9 @@ public class Sketch extends PApplet {
       return false;
     }
     else if(playerX > 1173 && playerX < 1515 && playerY > 690 && playerY < 710){
+      return false;
+    }
+    else if(playerX > -30 && playerX < 20 && playerY > 280 && playerY < 340){
       return false;
     }
     else{
@@ -573,6 +654,9 @@ public class Sketch extends PApplet {
     else if(playerX > 1170 && playerX < 1480 && playerY > 630 && playerY < 645){
       return false; 
     }
+    else if(playerX > -30 && playerX < 20 && playerY > 280 && playerY < 340){
+      return false;
+    }
     else{
       return true;
     }
@@ -583,7 +667,7 @@ public class Sketch extends PApplet {
       return false;
     }
     //else if(playerX > 1560 &&(playerY))
-    else if (playerX > 46 && playerX < 220 && playerY > 50 && playerY < 400 ){
+    else if (playerX > 70 && playerX < 220 && playerY > 50 && playerY < 400 ){
       return false;
     }
     else if(playerY < 110 && playerX > 156 && playerX < 210){
@@ -640,10 +724,10 @@ public class Sketch extends PApplet {
     if (playerX <= 30){
       return false;
     }
-    else if (playerX < 156 && playerX > 30 && playerY < 690 && playerY > height / 2){
+    else if (playerX < 156 && playerX > 20 && playerY < 690 && playerY > height / 2){
       return false;
     }
-    else if (playerX < 156 && playerX > 30 && playerY > 50 && playerY < height / 2){
+    else if (playerX < 156 && playerX > 20 && playerY > 50 && playerY < height / 2){
       return false;
     }
     else if (playerX < 230 && playerX > 225 && playerY > 10 && playerY < 335){
@@ -697,23 +781,23 @@ public class Sketch extends PApplet {
   }
 
   public void displayWinScreen(){
-    fill(181, 142, 110);
-    rect(20,20,1600,800);
-    textSize(150);
-    fill(0, 408, 612);
-    text(strWin,800,200);
-    rect(800,400,400,200);
-    textSize(50);
-    fill(0, 408, 612);
-    text(strRedo,800,400);
+    image(imgWinScreen,0,0);
+
   }
   
   public void playerLifeLost(){
     playerLives = playerLives - 1;
     playerX = 22;
     playerY = 315;
-
+    if(mousePressed && keysCollected == 4){
+      keysCollected = 0;
+      playerLives = 5;
+      playerX = -22;
+      playerY = 316;
+      showKey1 = true;
+      showKey2 = true;
+      showKey3 = true;
+      showKey4 = true;
+     }
   }
-
-
 }
