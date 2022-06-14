@@ -29,7 +29,7 @@ public class Sketch extends PApplet {
 
   float playerX = -22;
   float playerY = 316;
-  float playerSpeed = 4;
+  float playerSpeed = 5;
   int robotHeight = 60;
   int robotWidth = 50;
 
@@ -75,7 +75,7 @@ public class Sketch extends PApplet {
   float zombie5ImageX = zombie5X - 7;
   float zombie5ImageY = zombie5Y - 26;
 
-  float zombie1Speed = 2;
+  float zombie1Speed = 3;
   float zombie2Speed = 3;
   float zombie3Speed = 3;
   float zombie4Speed = 3;
@@ -191,7 +191,7 @@ public class Sketch extends PApplet {
    // loop for locations of falling rocks
    for (int i = 0; i < circleX.length; i++){
      circleY[i] = random(height);
-     circleX[i] = random(width);
+     circleX[i] = random(120, width);
     }  
   }
 
@@ -427,10 +427,8 @@ public class Sketch extends PApplet {
 
     // Rock colission detection
     for (int i = 0; i < circleY.length; i++){
-      if ((playerImageX <= circleX[i] + 40) && (playerImageX >= circleX[i] - 40)){
-        if((playerImageY <= circleY[i] + 40) && (playerImageY >= circleY[i] - 40)){
-          playerLifeLost();
-        }
+      if((playerImageX < (circleX[i] + 40)) && playerImageX > (circleX[i] - 40) && playerImageY > (circleY[i] - 40) && playerImageY < (circleY[i] + 40)){
+        playerLifeLost();
       }
     }
 
@@ -444,7 +442,7 @@ public class Sketch extends PApplet {
 
     // key 2 colission detection
     if(showKey2 == true){
-      if (playerX > 370 && playerX < 505 && playerY > 680 && playerY < 725){
+      if (playerX > 370 && playerX < 505 && playerY > 680 && playerY < 750){
         keysCollected = keysCollected + 1;
         showKey2 = false;
       } 
