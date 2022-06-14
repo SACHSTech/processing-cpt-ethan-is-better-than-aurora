@@ -29,7 +29,7 @@ public class Sketch extends PApplet {
 
   float playerX = -22;
   float playerY = 316;
-  float playerSpeed = 5;
+  float playerSpeed = 4;
   int robotHeight = 60;
   int robotWidth = 50;
 
@@ -92,7 +92,7 @@ public class Sketch extends PApplet {
   // arrays for the falling rocks
   float[] circleY = new float[2];
   float[] circleX = new float[2];
-  int intCircleSpeed = 3;
+  int intCircleSpeed = 2;
 
   // key location variables
   int firstKeyX = 120;
@@ -272,7 +272,7 @@ public class Sketch extends PApplet {
       if(key == 'w' && canMoveUP(playerX, playerY) == true){
         playerY -= playerSpeed;
       }
-      else if(key == 'a' && canMoveLEFT(playerX, playerY) == true){
+      else if(key == 'a'&& canMoveLEFT(playerX, playerY) == true){
         playerX -= playerSpeed;
       }
       else if(key == 's' && canMoveDOWN(playerX, playerY) == true){
