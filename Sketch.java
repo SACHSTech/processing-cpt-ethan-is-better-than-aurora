@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
- * In this program, a game is generated where the player has to escape the maze by collecting keys and avoiding falling rocks and zombies using the WASD keys.
+* In this program, a game is generated where the player has to escape the maze by collecting keys and avoiding falling rocks and zombies using the WASD keys.
 * @author: Ethan Rodrigues and Aurora Chen
 * 
 */
@@ -818,7 +818,10 @@ public class Sketch extends PApplet {
     }
   }
 
-  // when this method is called, display the win screen image
+  /**
+  * When all the keys are collected, the win screen is displayed.  If the screen is pressed and the keys are collected, the player's location, keys and lives are reset.
+  * 
+  */  
   public void displayWinScreen(){
     image(imgWinScreen,0,0);
     if(mousePressed && keysCollected == 4){
@@ -833,7 +836,10 @@ public class Sketch extends PApplet {
     }
   }
   
-  // when this method is called, the player looses a life and their position is reset. If they have no more lives, the game over screen is displayed
+  /**
+  * When the player life is lost, the playerlives integer is decreased and the location is reset. If the mouse is pressed and all keys are collected, the game is reset.
+  * 
+  */    
   public void playerLifeLost(){
     playerLives = playerLives - 1;
     playerX = 22;
