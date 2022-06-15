@@ -128,7 +128,6 @@ public class Sketch extends PApplet {
    background(139, 163, 155);
    imgBackground = loadImage("Background.png");
 
-
    // set menu screen images
    imgInstructionScreen = loadImage("InstructionScreen.png");
    imgLooseScreen = loadImage("LooseScreen.png");
@@ -299,7 +298,7 @@ public class Sketch extends PApplet {
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie2X, zombie2Y);
     zombie2X += zombie2Speed;
 
-    // prevent zombie from exiting the desired area
+    // prevent zombie 2 from exiting the desired area
     if (zombie2X > 860 || zombie2X < 240){
      zombie2Speed *= -1;
     }
@@ -311,7 +310,7 @@ public class Sketch extends PApplet {
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie3X, zombie3Y);
     zombie3X += zombie3Speed;
 
-    // prevent zombie from exiting the screen area
+    // prevent zombie 3 from exiting the screen area
     if (zombie3X > 1040 || zombie3X < 240){
       zombie3Speed *= -1;
     }
@@ -323,7 +322,7 @@ public class Sketch extends PApplet {
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie4X, zombie4Y);
     zombie4X += zombie4Speed;
 
-    // prevent zombie from exiting the desired area
+    // prevent zombie 4 from exiting the desired area
     if (zombie4X > 1556 || zombie4X < 240){
       zombie4Speed *= -1;
     }
@@ -335,7 +334,7 @@ public class Sketch extends PApplet {
     image(zombieFrames[(frameCount/10)%intWalkingZombieFrames], zombie5X, zombie5Y);
     zombie5X += zombie5Speed;
 
-    // prevent zombie from exiting the desired area
+    // prevent zombie 5 from exiting the desired area
     if (zombie5X > 1556 || zombie5X < 940){
       zombie5Speed *= -1;
     }
